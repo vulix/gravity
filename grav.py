@@ -61,7 +61,7 @@ fid.close()
 g, g_out  = ([],[])
 
 #fid = open(sys.argv[2]+'.out','w')
-
+old_time_step = 1
 for gp in grav_pos:
     g_sum = 0
     g_out =  []   
@@ -69,10 +69,10 @@ for gp in grav_pos:
         time_step = prism[0]
 
         # there's a better way to do this
-        #if time_step != old_time_step:
-        #    g_out.append([gp[0],old_time_step, g_sum])
-        #    g_sum = 0;
-        #    old_time_step = time_step
+        if time_step != old_time_step:
+            g_out.append([gp[0],old_time_step, g_sum])
+            g_sum = 0;
+            old_time_step = time_step
         
         dxMid = prism[1]
         dyMid = prism[2]
