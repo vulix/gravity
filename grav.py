@@ -1,5 +1,4 @@
 #!/usr/bin/python
-
 import sys
 from math import sqrt, pow
 

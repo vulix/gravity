@@ -1,5 +1,6 @@
 import sys
 import os
+
 pos_num=int(sys.argv[1])
 time_step=int(sys.argv[2])
 output=[[0.0 for i in range(time_step+1)] for j in range(pos_num)]

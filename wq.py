@@ -1,5 +1,4 @@
 #!/usr/bin/python
- 
 from work_queue import *
 import sys
  

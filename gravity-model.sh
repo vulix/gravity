@@ -9,6 +9,8 @@ mkdir test
 mkdir grav_pos
 split -a4 -l $1 test1_density_grid.txt test/grid
 split -a4 -l $2 test1_grav_pos.txt grav_pos/pos
+chmod go+rw -R test/
+chmod go+rw -R grav_pos
 #set environmental variables
 export PATH=~/cctools/bin:${PATH}
 export PYTHONPATH=${PYTHONPATH}:~/cctools/lib/python2.6/site-packages
@@ -16,4 +18,7 @@ cd gravity-master
 python wq.py
 python merge.py $3 $4
 rm grav*.txt
+chmod go-w -R test/
+chmod go-w -R grav_pos/
+
   
