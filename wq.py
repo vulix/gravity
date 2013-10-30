@@ -1,7 +1,7 @@
 #!/usr/bin/python
 from work_queue import *
 import sys
- 
+path=sys.argv[1] 
 try:
     Q = WorkQueue(port = 20994)
     Q.specify_name("ACIC2013")
@@ -10,20 +10,22 @@ except:
     sys.exit(1)
  
 print "Listening on port %d." % Q.port
-densitys=os.listdir('../test')
+densitys=os.listdir(path+"/test")
 densitys.sort()
-grav_positions=os.listdir('../grav_pos')
+grav_positions=os.listdir(path+"/grav_pos")
 grav_positions.sort()
 print "total density_grids %d " %(len(densitys))
 print "Total positions %d" % (len(grav_positions))
 #print densitys
 #print grav_positions
 print "Open a new terminal window to submit workers."
-for i in range(1):
-    for j in range(2):
+print "Please add cctools directory to your path in the new terminal."
+print "submit workers to this queue with -> torque_submit_workers -t 300 servername 20994 100."
+for i in range(len(densitys)):
+    for j in range(len(grav_positions)):
         outfile = "grav"+str(i)+"_"+str(j)+".txt"
-        infile2 = "../grav_pos/"+grav_positions[j]
-	infile1 = "../test/"+densitys[i]
+        infile2 = path+"/grav_pos/"+grav_positions[j]
+	infile1 = path+"/test/"+densitys[i]
         #print infile
         command = "python grav.py %s %s > %s" % (infile1, infile2, outfile)
         T = Task(command)

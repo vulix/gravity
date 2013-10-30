@@ -1,14 +1,15 @@
 import sys
 import os
 
-pos_num=int(sys.argv[1])
-time_step=int(sys.argv[2])
+pos_num=int(sys.argv[2])
+time_step=int(sys.argv[3])
+path=sys.argv[1]
 output=[[0.0 for i in range(time_step+1)] for j in range(pos_num)]
 for i in range(pos_num):
 	output[i][0]=i+1
-densitys=os.listdir('../test')
+densitys=os.listdir(path+"/test")
 densitys.sort()
-grav_positions=os.listdir('../grav_pos')
+grav_positions=os.listdir(path+"/grav_pos")
 grav_positions.sort()
 for i in range(len(densitys)):
     for j in range(len(grav_positions)):
