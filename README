@@ -1,0 +1,21 @@
+User Guide 
+1. get gravity-model.sh script on your futuregrid nodeA
+2. change the permission of the gravity-model.sh
+	chmod 755 gravity-model.sh
+3. parameters for gravity-model.sh
+	a. how many lines each density grid file piece has 
+	b. how many lines each gravity position file piece has
+	c. how many gravity positions there are in total
+		if you don't know it, try: awk < test1_grav_pos.txt '{print $1}'| sort | uniq | wc -l
+	d. how many time steps there are in total
+		if you don't know it, try: awk < test1_denisty_grid.txt '{print $1}'| sort | uniq | wc -l
+4. execute gravity-model.sh on futuregrid
+	./gravity-model.sh 1000000 10 10000 55
+5. open a new terminal, log in futuregrid and execute the commands below 
+	export PATH=~/cctools/bin:${PATH}
+	torque_submit_workers -t 30 nodeA.futuregrid.org  100 (please replace nodeA for your actual login node)
+6. repeat step 5 in different login nodes
+7. wait till the process is finished
+ 
+
+
