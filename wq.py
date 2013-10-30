@@ -1,14 +1,13 @@
 #!/usr/bin/python
 from work_queue import *
 import sys
-path=sys.argv[1] 
 try:
     Q = WorkQueue(port = 20994)
     Q.specify_name("ACIC2013")
 except:
     print "could not instantiate Work Queue master"
     sys.exit(1)
- 
+path=os.getcwd() 
 print "Listening on port %d." % Q.port
 densitys=os.listdir(path+"/test")
 densitys.sort()
@@ -26,13 +25,14 @@ for i in range(len(densitys)):
         outfile = "grav"+str(i)+"_"+str(j)+".txt"
         infile2 = path+"/grav_pos/"+grav_positions[j]
 	infile1 = path+"/test/"+densitys[i]
-        #print infile
+        print infile1
         command = "python grav.py %s %s > %s" % (infile1, infile2, outfile)
+	print command
         T = Task(command)
  
         T.specify_file("grav.py", "grav.py", WORK_QUEUE_INPUT, cache = True)
-        T.specify_file(infile1, infile1, WORK_QUEUE_INPUT, cache = False)
-        T.specify_file(infile2, infile2, WORK_QUEUE_INPUT, cache = False)
+        T.specify_file(infile1, infile1, WORK_QUEUE_INPUT, cache = True)
+        T.specify_file(infile2, infile2, WORK_QUEUE_INPUT, cache = True)
         T.specify_file(outfile, outfile, WORK_QUEUE_OUTPUT, cache = False)
  
         taskid = Q.submit(T)
